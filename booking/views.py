@@ -8,6 +8,7 @@ from .models import Availability, Booking
 from .serializers import AvailabilitySerializer, BookingSerializer
 from datetime import datetime, timedelta, time
 from drf_spectacular.utils import extend_schema, OpenApiParameter
+from django.db import IntegrityError
 
 # Create your views here.
 
@@ -22,7 +23,6 @@ class AvailabilityViewSet(viewsets.ModelViewSet):
         try:
             serializer.save(user=self.request.user)
         except Exception as e:
-            from django.db import IntegrityError
             if isinstance(e, IntegrityError):
                 return Response({'error': 'This availability slot already exists for this user.'}, status=status.HTTP_400_BAD_REQUEST)
             raise e
