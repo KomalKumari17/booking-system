@@ -1,0 +1,5 @@
+Django>=5.2.3
+djangorestframework
+djangorestframework-simplejwt
+drf-spectacular
+drf-spectacular-sidecar
